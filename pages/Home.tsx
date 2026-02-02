@@ -78,7 +78,7 @@ const Home: React.FC = () => {
                 <span className="capitalize">{heroMovie.type}</span>
               </div>
               <p className="text-zinc-400 text-lg md:text-xl max-w-2xl line-clamp-3">
-                Experience the latest and most popular {heroMovie.type} on irwanStream. 
+                Experience the latest and most popular {heroMovie.type} on ZelStream. 
                 Full HD quality with smooth streaming for the best viewing experience.
               </p>
               <div className="flex flex-wrap gap-4 pt-4">

@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-8">
             <Link to="/" className="text-red-600 font-extrabold text-2xl tracking-tighter hover:text-red-500 transition-colors">
-              IRWANSTREAM
+              ZELSTREAM
             </Link>
             
             <div className="hidden md:flex items-center gap-6">

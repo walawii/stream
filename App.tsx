@@ -3,10 +3,10 @@ import React, { Suspense, lazy } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
-// Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'));
-const Search = lazy(() => import('./pages/Search'));
-const Detail = lazy(() => import('./pages/Detail'));
+// Lazy load pages with explicit extensions for ESM compatibility
+const Home = lazy(() => import('./pages/Home.tsx'));
+const Search = lazy(() => import('./pages/Search.tsx'));
+const Detail = lazy(() => import('./pages/Detail.tsx'));
 
 const App: React.FC = () => {
   return (

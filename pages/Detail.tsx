@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDetail } from '../services/api.ts';
@@ -69,7 +68,6 @@ const Detail: React.FC = () => {
                 src={currentUrl} 
                 className="w-full h-full border-0"
                 allowFullScreen
-                sandbox="allow-forms allow-scripts allow-same-origin allow-presentation"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               />
             ) : (

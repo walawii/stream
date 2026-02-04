@@ -1,40 +1,42 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MovieItem } from '../types';
+import { Play, Star } from 'lucide-react';
+import { MovieItem } from '../types.ts';
 
-interface MovieCardProps {
-  movie: MovieItem;
-}
-
-const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+const MovieCard: React.FC<{ movie: MovieItem }> = ({ movie }) => {
   return (
     <Link 
       to={`/detail/${encodeURIComponent(movie.detailPath)}`}
-      className="group relative block rounded-xl overflow-hidden bg-zinc-900 transition-all duration-300 hover:scale-105 hover:z-10 shadow-lg hover:shadow-red-900/20"
+      className="group relative block bg-zinc-900 rounded-lg overflow-hidden transition-all duration-300 hover:z-20 hover:scale-105 hover:shadow-2xl hover:shadow-red-900/10"
     >
-      <div className="aspect-[2/3] relative">
+      <div className="aspect-[2/3] relative overflow-hidden">
         <img 
           src={movie.poster} 
           alt={movie.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+          <div className="bg-red-600 rounded-full p-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-75">
+            <Play fill="white" className="text-white ml-1" size={24} />
+          </div>
+        </div>
         
         {/* Rating Badge */}
-        <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-xs font-bold text-yellow-500 border border-zinc-800 flex items-center gap-1">
-          <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
+        <div className="absolute top-2 right-2 bg-black/80 backdrop-blur-md px-1.5 py-0.5 rounded text-xs font-bold text-yellow-500 border border-white/10 flex items-center gap-1 shadow-lg">
+          <Star size={10} fill="currentColor" />
           {movie.rating || 'N/A'}
         </div>
+      </div>
 
-        {/* Info Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-          <p className="text-zinc-400 text-xs font-medium uppercase mb-1">{movie.year} • {movie.type}</p>
-          <h3 className="text-white font-bold text-sm leading-tight line-clamp-2">{movie.title}</h3>
-          <p className="text-zinc-500 text-[10px] mt-2 line-clamp-1">{movie.genre}</p>
+      <div className="p-3">
+        <h3 className="text-white font-bold text-sm truncate group-hover:text-red-500 transition-colors">
+          {movie.title}
+        </h3>
+        <div className="flex items-center justify-between mt-1 text-xs text-zinc-500">
+          <span>{movie.year}</span>
+          <span className="uppercase border border-zinc-800 px-1 rounded bg-zinc-900">{movie.type}</span>
         </div>
       </div>
     </Link>

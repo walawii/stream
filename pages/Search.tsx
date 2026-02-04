@@ -1,22 +1,27 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { searchMovies } from '../services/api';
-import { MovieItem } from '../types';
-import MovieCard from '../components/MovieCard';
-import { GridSkeleton } from '../components/Skeleton';
+import { searchContent } from '../services/api.ts';
+import { MovieItem } from '../types.ts';
+import MovieCard from '../components/MovieCard.tsx';
+import { GridSkeleton } from '../components/Skeleton.tsx';
+import { SearchX } from 'lucide-react';
 
-const Search: React.FC = () => {
+const SearchPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
   const [results, setResults] = useState<MovieItem[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!query) return;
+    
+    // Simple debounce via timeout is handled by React's batching slightly, 
+    // but the API call itself should ideally be debounced if typed directly.
+    // Since this page loads on navigation, we just fetch immediately.
     const performSearch = async () => {
-      if (!query) return;
       setLoading(true);
-      const data = await searchMovies(query);
+      const data = await searchContent(query);
       setResults(data.items);
       setLoading(false);
     };
@@ -25,33 +30,35 @@ const Search: React.FC = () => {
   }, [query]);
 
   return (
-    <div className="pt-24 pb-20 max-w-7xl mx-auto px-4 md:px-8">
-      <div className="mb-10">
-        <h1 className="text-3xl font-bold mb-2">Search Results</h1>
-        <p className="text-zinc-500">Showing matches for: <span className="text-zinc-200 italic">"{query}"</span></p>
+    <div className="pt-24 pb-20 min-h-screen max-w-7xl mx-auto px-4 md:px-8">
+      <div className="mb-8 border-b border-white/10 pb-4">
+        <h1 className="text-3xl font-bold text-white mb-2">Search Results</h1>
+        <p className="text-zinc-400">
+          Found {results.length} results for <span className="text-white italic">"{query}"</span>
+        </p>
       </div>
 
       {loading ? (
-        <GridSkeleton count={12} />
+        <GridSkeleton count={8} />
       ) : results.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-          {results.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+          {results.map((item) => (
+            <MovieCard key={item.id} movie={item} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center py-32 text-center">
-          <div className="bg-zinc-900/50 p-8 rounded-full mb-6">
-            <svg className="w-16 h-16 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+        <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+          <div className="bg-zinc-900 p-6 rounded-full">
+            <SearchX size={48} className="text-zinc-600" />
           </div>
-          <h2 className="text-2xl font-bold text-zinc-300 mb-2">No results found</h2>
-          <p className="text-zinc-500 max-w-md">We couldn't find anything matching your search. Try different keywords or browse our categories.</p>
+          <h2 className="text-2xl font-bold text-white">No matches found</h2>
+          <p className="text-zinc-500 max-w-md">
+            We couldn't find anything matching your search. Try adjusting your keywords or browse our categories.
+          </p>
         </div>
       )}
     </div>
   );
 };
 
-export default Search;
+export default SearchPage;

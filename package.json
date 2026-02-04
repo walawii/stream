@@ -1,5 +1,5 @@
 {
-  "name": "zelstream---premium-movie-&-series",
+  "name": "streamx---ultimate-cinema",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,9 @@
   "dependencies": {
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "7.1.5"
+    "react-router-dom": "7.1.5",
+    "lucide-react": "0.475.0",
+    "framer-motion": "12.4.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -10,13 +10,6 @@ export interface MovieItem {
   detailPath: string;
 }
 
-export interface ApiResponse {
-  success: boolean;
-  items: MovieItem[];
-  page: number;
-  hasMore: boolean;
-}
-
 export interface Episode {
   id: string;
   title: string;
@@ -31,6 +24,13 @@ export interface MovieDetail extends MovieItem {
   related?: MovieItem[];
 }
 
+export interface ApiResponse {
+  success: boolean;
+  items: MovieItem[];
+  page: number;
+  hasMore: boolean;
+}
+
 export enum Category {
   TRENDING = 'trending',
   INDO_MOVIES = 'indonesian-movies',
@@ -43,7 +43,7 @@ export enum Category {
 export const CATEGORY_LABELS: Record<Category, string> = {
   [Category.TRENDING]: 'Trending Now',
   [Category.INDO_MOVIES]: 'Indonesian Movies',
-  [Category.INDO_DRAMA]: 'Indonesian Drama',
+  [Category.INDO_DRAMA]: 'Indo Drama',
   [Category.KDRAMA]: 'K-Drama',
   [Category.SHORT_TV]: 'Short TV',
   [Category.ANIME]: 'Anime'

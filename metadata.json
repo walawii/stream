@@ -1,5 +1,8 @@
 {
-  "name": "ZelStream - Premium Movie & Series",
-  "description": "A modern, high-performance streaming platform for movies, anime, and dramas with a Netflix-inspired dark theme.",
-  "requestFramePermissions": []
+  "name": "StreamX - Ultimate Cinema",
+  "description": "Premium streaming experience for movies and series.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
 }

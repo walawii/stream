@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getDetail } from '../services/api.ts';
 import { MovieDetail, Episode } from '../types.ts';
 import MovieCard from '../components/MovieCard.tsx';
-import { Play, Calendar, Star, Tag, ChevronRight, PlayCircle } from 'lucide-react';
+import { Play, Calendar, Star, Tag, PlayCircle } from 'lucide-react';
 
 const Detail: React.FC = () => {
   const { path } = useParams<{ path: string }>();
@@ -17,14 +17,12 @@ const Detail: React.FC = () => {
     const loadDetail = async () => {
       if (!path) return;
       setLoading(true);
-      // Scroll to top on new detail load
       window.scrollTo(0, 0);
       
       const res = await getDetail(decodeURIComponent(path));
       if (res.success && res.data) {
         setData(res.data);
         
-        // Auto select source
         if (res.data.playerUrl) {
           setCurrentUrl(res.data.playerUrl);
         } else if (res.data.episodes?.length) {
@@ -45,12 +43,12 @@ const Detail: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="pt-24 max-w-7xl mx-auto px-4 md:px-8 animate-pulse space-y-8">
-        <div className="w-full aspect-video bg-zinc-900 rounded-2xl" />
-        <div className="flex gap-8">
-          <div className="w-64 h-96 bg-zinc-900 rounded-xl hidden md:block" />
+      <div className="pt-20 max-w-7xl mx-auto px-4 md:px-8 animate-pulse space-y-8">
+        <div className="w-full aspect-video bg-zinc-900 rounded-xl" />
+        <div className="flex flex-col md:flex-row gap-8">
+          <div className="w-full md:w-64 h-96 bg-zinc-900 rounded-xl hidden md:block" />
           <div className="flex-1 space-y-4">
-            <div className="w-2/3 h-10 bg-zinc-900 rounded" />
+            <div className="w-2/3 h-8 bg-zinc-900 rounded" />
             <div className="w-full h-32 bg-zinc-900 rounded" />
           </div>
         </div>
@@ -63,9 +61,9 @@ const Detail: React.FC = () => {
   return (
     <div className="min-h-screen pb-20">
       {/* Player Section */}
-      <div className="bg-black pt-20 pb-10 border-b border-zinc-900">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="relative aspect-video w-full bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+      <div className="bg-black pt-16 md:pt-20 pb-6 md:pb-10 border-b border-zinc-900 sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-0 md:px-8">
+          <div className="relative aspect-video w-full bg-zinc-950 md:rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
             {currentUrl ? (
               <iframe 
                 src={currentUrl} 
@@ -84,13 +82,13 @@ const Detail: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
-        <div className="flex flex-col lg:flex-row gap-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 mt-6">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
           
           {/* Main Info */}
           <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-4 text-sm mb-4">
-              <span className="bg-white text-black font-bold px-2 py-0.5 rounded uppercase text-xs">
+            <div className="flex flex-wrap items-center gap-3 text-xs md:text-sm mb-3 md:mb-4">
+              <span className="bg-white text-black font-bold px-2 py-0.5 rounded uppercase text-[10px] md:text-xs">
                 {data.type}
               </span>
               <span className="flex items-center gap-1 text-zinc-300">
@@ -104,19 +102,19 @@ const Detail: React.FC = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl font-black text-white mb-6">{data.title}</h1>
+            <h1 className="text-2xl md:text-4xl font-black text-white mb-4 md:mb-6 leading-tight">{data.title}</h1>
             
-            <p className="text-zinc-400 text-lg leading-relaxed mb-8 border-l-4 border-red-600 pl-4">
+            <p className="text-zinc-400 text-sm md:text-lg leading-relaxed mb-8 border-l-4 border-red-600 pl-4">
               {data.description || "No synopsis available."}
             </p>
 
             {/* Episodes Grid */}
             {data.episodes && data.episodes.length > 0 && (
-              <div className="mt-10">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <div className="mt-8 md:mt-10">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <PlayCircle className="text-red-600" /> Episodes ({data.episodes.length})
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin">
                   {data.episodes.map((ep) => (
                     <button
                       key={ep.id}
@@ -140,7 +138,7 @@ const Detail: React.FC = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:w-80 space-y-6">
+          <div className="lg:w-80 space-y-6 order-last lg:order-none">
             <div className="rounded-xl overflow-hidden shadow-2xl ring-1 ring-white/10 hidden lg:block">
               <img src={data.poster} alt={data.title} className="w-full object-cover" />
             </div>
@@ -164,9 +162,10 @@ const Detail: React.FC = () => {
 
         {/* Related */}
         {data.related && data.related.length > 0 && (
-          <div className="mt-20 border-t border-white/5 pt-10">
-            <h3 className="text-2xl font-bold text-white mb-6">You May Also Like</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div className="mt-12 md:mt-20 border-t border-white/5 pt-8 md:pt-10">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-6">You May Also Like</h3>
+            {/* Reuse same grid logic as Home */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
               {data.related.map((item) => (
                 <MovieCard key={item.id} movie={item} />
               ))}

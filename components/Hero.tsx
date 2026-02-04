@@ -18,11 +18,11 @@ const Hero: React.FC<HeroProps> = ({ item }) => {
           src={item.poster} 
           alt={item.title}
           fetchPriority="high" // Critical for LCP speed
-          className="w-full h-full object-cover blur-sm brightness-[0.4] scale-105"
+          className="w-full h-full object-cover brightness-[0.4]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-950" />
+        {/* Unified high-performance gradients for both mobile and desktop */}
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-transparent to-transparent" />
       </div>
 
       <div className="relative h-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col justify-end pb-12 md:pb-24">

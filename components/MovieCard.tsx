@@ -8,7 +8,7 @@ const MovieCard: React.FC<{ movie: MovieItem }> = memo(({ movie }) => {
   return (
     <Link 
       to={`/detail/${encodeURIComponent(movie.detailPath)}`}
-      className="group relative block bg-zinc-900 rounded-lg overflow-hidden transition-all duration-300 hover:z-20 hover:scale-105 hover:shadow-2xl hover:shadow-red-900/10 active:scale-95"
+      className="group relative block bg-zinc-900 rounded-lg overflow-hidden transition-all duration-300 hover:z-20 md:hover:scale-105 md:hover:shadow-2xl md:hover:shadow-red-900/10 active:scale-95"
     >
       <div className="aspect-[2/3] relative overflow-hidden bg-zinc-800">
         <img 
@@ -16,7 +16,7 @@ const MovieCard: React.FC<{ movie: MovieItem }> = memo(({ movie }) => {
           alt={movie.title}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110"
         />
         {/* Desktop Hover Overlay */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden md:flex items-center justify-center backdrop-blur-[2px]">
@@ -33,7 +33,7 @@ const MovieCard: React.FC<{ movie: MovieItem }> = memo(({ movie }) => {
       </div>
 
       <div className="p-2 md:p-3">
-        <h3 className="text-white font-bold text-xs md:text-sm truncate group-hover:text-red-500 transition-colors">
+        <h3 className="text-white font-bold text-xs md:text-sm truncate md:group-hover:text-red-500 transition-colors">
           {movie.title}
         </h3>
         <div className="flex items-center justify-between mt-1 text-[10px] md:text-xs text-zinc-500">

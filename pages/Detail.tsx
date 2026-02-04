@@ -69,6 +69,7 @@ const Detail: React.FC = () => {
                 className="w-full h-full border-0"
                 allowFullScreen
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                sandbox="allow-forms allow-scripts allow-same-origin allow-presentation allow-orientation-lock"
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-zinc-500 gap-4">

@@ -42,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ item }) => {
 
           <p className="text-zinc-300 text-lg line-clamp-2 md:line-clamp-3 font-medium max-w-xl">
             Watch {item.title} and other popular {item.genre} content in high definition. 
-            Experience the best streaming quality only on StreamX.
+            Experience the best streaming quality only on IrwanStream.
           </p>
 
           <div className="flex items-center gap-4 pt-4">

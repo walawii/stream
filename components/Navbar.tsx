@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-8">
             <Link to="/" className="flex items-center gap-2 group">
               <Film className="text-red-600 w-6 h-6 transform group-hover:rotate-12 transition-transform" />
-              <span className="text-red-600 font-black text-2xl tracking-tighter">STREAMX</span>
+              <span className="text-red-600 font-black text-2xl tracking-tighter">IRWANSTREAM</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-6">

@@ -1,8 +1,5 @@
 {
   "name": "IrwanStream - Ultimate Cinema",
   "description": "Premium streaming experience for movies and series.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
